@@ -50,7 +50,7 @@
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
 
-    if(Array.isArray(collection)) {
+    if (Array.isArray(collection)) {
       for (let i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
       }
@@ -113,7 +113,7 @@
     }
 
     _.each(array, function(item) {
-      if(!transformedArray.includes(iterator(item))) {
+      if (!transformedArray.includes(iterator(item))) {
         transformedArray.push(iterator(item));
         result.push(item);
       }
@@ -188,7 +188,7 @@
       values.shift();
     }
 
-    _.each(values, function(item){
+    _.each(values, function(item) {
       accumulator = iterator(accumulator, item);
     });
 
@@ -217,7 +217,7 @@
     }
 
     return _.reduce(collection, function(isTrue, item) {
-      if(isTrue === false) {
+      if (isTrue === false) {
         return false;
       }
       return !!iterator(item);
@@ -229,14 +229,14 @@
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
 
-    if (collection.length === 0) {return false;}
+    if (collection.length === 0) { return false; }
 
     if (iterator === undefined) {
       iterator = _.identity;
     }
 
     return !_.every(collection, function(item) {
-      if(!!iterator(item)) {
+      if (!!iterator(item)) {
         return false;
       } else {
         return true;
@@ -278,6 +278,16 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+
+    _.each(arguments, function (item) {
+      for (let key in item) {
+        if (obj[key] === undefined) {
+          obj[key] = item[key];
+        }
+      }
+    });
+
+    return obj;
   };
 
 
