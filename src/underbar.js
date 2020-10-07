@@ -104,6 +104,22 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+
+    let result = [];
+    let transformedArray = [];
+
+    if (iterator === undefined) {
+      iterator = _.identity;
+    }
+
+    _.each(array, function(item) {
+      if(!transformedArray.includes(iterator(item))) {
+        transformedArray.push(iterator(item));
+        result.push(item);
+      }
+    });
+
+    return result;
   };
 
 
